@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Transkrip Nilai ASAS Semester 2 Kelas 5 SDN Pengkol</title>
+  <style>
+    :root { --green:#00796b; }
+    body {
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:#f5f7fa;
+    }
+    .wrap {
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:30px 12px;
+      box-sizing:border-box;
+    }
+    .container {
+      background:#fff;
+      width:100%;
+      max-width:560px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      padding:28px;
+      box-sizing:border-box;
+      position:relative;
+      text-align:center;
+    }
+    .logo {
+      position:absolute;
+      top:12px;
+      left:12px;
+      width:70px;
+      height:auto;
+    }
+    h2 { color:var(--green); margin:0 0 6px 0; }
+    p.subtitle { color:var(--green); font-weight:700; margin:0 0 18px 0; }
+    input {
+      width:100%;
+      padding:10px 12px;
+      margin:10px 0;
+      border:1px solid #d0d0d0;
+      border-radius:8px;
+      font-size:14px;
+      box-sizing:border-box;
+    }
+    button {
+      padding:6px 10px;
+      border-radius:6px;
+      border:none;
+      background:var(--green);
+      color:#fff;
+      font-size:14px;
+      cursor:pointer;
+    }
+    button:hover { background:#005b49; }
+    .hidden { display:none; }
+    .judul-nilai {
+      text-align:center;
+      background:var(--green);
+      color:#fff;
+      padding:8px;
+      border-radius:6px;
+      margin:18px 0 10px 0;
+      font-size:15px;
+    }
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+    }
+    th,td {
+      border:1px solid #ddd;
+      padding:8px;
+      text-align:center;
+      font-size:14px;
+    }
+    th { background:var(--green); color:#fff; font-weight:700; }
+    .result { text-align:left; }
+    .wali {
+      text-align:left;
+      font-weight:700;
+      font-size:13px;
+      color:#333;
+      margin-top:16px;
+      margin-bottom:10px;
+    }
+    .tombol-cetak {
+      text-align:right;
+      margin-top:8px;
+    }
+    .tombol-cetak button {
+      padding:6px 10px;
+      border-radius:6px;
+      border:none;
+      background:var(--green);
+      color:#fff;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .tombol-cetak button:hover { background:#005b49; }
+    #captureArea {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <!-- Halaman Login -->
+  <div id="loginForm" class="container">
+    <img src="Desain tanpa judul.png" class="logo" alt="Logo SD">
+    <h2>Transkrip Nilai ASAS</h2>
+    <p class="subtitle">Semester 2 Kelas 5 SDN Pengkol</p>
+    <input type="text" id="nama" placeholder="Contoh: AHMAD AJI SOKO">
+    <input type="text" id="nisn" placeholder="Masukkan NISN">
+    <button style="width:100%;margin-top:8px;" onclick="lihatTranskrip()">Lihat Transkrip</button>
+    <p id="error" style="color:#c0392b; margin-top:8px;"></p>
+  </div>
+
+  <!-- Halaman Hasil -->
+  <div id="hasil" class="container hidden">
+    <div id="captureArea">
+      <h2>Data Siswa</h2>
+      <div class="result">
+        <p><b>Nama:</b> <span id="namaSiswa"></span></p>
+        <p><b>NISN:</b> <span id="nisnSiswa"></span></p>
+        <h3 class="judul-nilai">Nilai Asesmen Sumatif Akhir Lingkup Materi</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Mata Pelajaran</th>
+              <th>Nilai</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody id="nilai"></tbody>
+        </table>
+
+        <!-- Wali Kelas di bawah tabel -->
+        <div class="wali hidden" id="waliBox">
+          Wali Kelas V<br>
+          ADITYA WAHYU WARDANA, S.Pd<br>
+          NIP 199403192023211005
+        </div>
+      </div>
+    </div>
+
+    <!-- Tombol cetak di luar area cetak -->
+    <div class="tombol-cetak hidden" id="tombolCetak">
+      <button onclick="cetakNilai()">Cetak Nilai</button>
+    </div>
+  </div>
+</div>
+
+<!-- Library untuk menangkap halaman jadi gambar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+// Data siswa
+const dataSiswa = [
+  {NISN:"1698", nama:"Alvaro Adnan Aji Pambudi", nilai:{Pendidikan_Pancasila:90, Bahasa_Indonesia:88, Matematika:85, Seni_Budaya:87, IPAS:89, Bahasa_Jawa:86}},
+  {NISN:"1699", nama:"Anantha Yudha Diztira", nilai:{Pendidikan_Pancasila:88, Bahasa_Indonesia:85, Matematika:82, Seni_Budaya:86, IPAS:87, Bahasa_Jawa:85}},
+  {NISN:"1700", nama:"Arifah Yhuan Nur Azizah", nilai:{Pendidikan_Pancasila:85, Bahasa_Indonesia:87, Matematika:83, Seni_Budaya:85, IPAS:84, Bahasa_Jawa:84}},
+  {NISN:"1701", nama:"Aurelia Gieni Lindria Putri", nilai:{Pendidikan_Pancasila:89, Bahasa_Indonesia:86, Matematika:84, Seni_Budaya:87, IPAS:88, Bahasa_Jawa:86}},
+  {NISN:"1702", nama:"Dhafitha Nizza Nur Azizah", nilai:{Pendidikan_Pancasila:86, Bahasa_Indonesia:84, Matematika:82, Seni_Budaya:85, IPAS:83, Bahasa_Jawa:85}},
+  {NISN:"1703", nama:"Dhian Rahmawati", nilai:{Pendidikan_Pancasila:87, Bahasa_Indonesia:85, Matematika:84, Seni_Budaya:86, IPAS:85, Bahasa_Jawa:85}},
+  {NISN:"1704", nama:"Dimas Rasyid Faristia", nilai:{Pendidikan_Pancasila:88, Bahasa_Indonesia:86, Matematika:83, Seni_Budaya:85, IPAS:86, Bahasa_Jawa:84}},
+  {NISN:"1705", nama:"Erfin Denu Setiawan", nilai:{Pendidikan_Pancasila:86, Bahasa_Indonesia:83, Matematika:82, Seni_Budaya:84, IPAS:85, Bahasa_Jawa:83}},
+  {NISN:"1706", nama:"Marsya Anindya Kiera", nilai:{Pendidikan_Pancasila:90, Bahasa_Indonesia:88, Matematika:86, Seni_Budaya:87, IPAS:89, Bahasa_Jawa:85}},
+  {NISN:"1708", nama:"Mikayla Ayuningtyas", nilai:{Pendidikan_Pancasila:89, Bahasa_Indonesia:87, Matematika:85, Seni_Budaya:86, IPAS:88, Bahasa_Jawa:84}},
+  {NISN:"1709", nama:"Muhammad Ozil Ramadhan", nilai:{Pendidikan_Pancasila:88, Bahasa_Indonesia:86, Matematika:84, Seni_Budaya:85, IPAS:87, Bahasa_Jawa:83}},
+  {NISN:"1710", nama:"Rhevan Nabil Yudanta", nilai:{Pendidikan_Pancasila:87, Bahasa_Indonesia:85, Matematika:83, Seni_Budaya:84, IPAS:86, Bahasa_Jawa:82}},
+  {NISN:"1711", nama:"Ridho Wicaksono", nilai:{Pendidikan_Pancasila:86, Bahasa_Indonesia:84, Matematika:82, Seni_Budaya:83, IPAS:85, Bahasa_Jawa:81}},
+  {NISN:"1712", nama:"Rizky Syam Dani", nilai:{Pendidikan_Pancasila:85, Bahasa_Indonesia:83, Matematika:81, Seni_Budaya:82, IPAS:84, Bahasa_Jawa:80}},
+  {NISN:"1713", nama:"Tanca Al Verosa", nilai:{Pendidikan_Pancasila:84, Bahasa_Indonesia:82, Matematika:80, Seni_Budaya:81, IPAS:83, Bahasa_Jawa:79}}
+];
+
+function lihatTranskrip(){
+  const namaInput=document.getElementById("nama").value.trim().toLowerCase();
+  const nisnInput=document.getElementById("nisn").value.trim();
+  const siswa=dataSiswa.find(s=>s.NISN===nisnInput && s.nama.toLowerCase()===namaInput);
+
+  if(!siswa){
+    document.getElementById("error").innerText="Data siswa tidak ditemukan!";
+    return;
+  }
+
+  document.getElementById("loginForm").classList.add("hidden");
+  document.getElementById("hasil").classList.remove("hidden");
+  document.getElementById("waliBox").classList.remove("hidden");
+  document.getElementById("tombolCetak").classList.remove("hidden");
+
+  document.getElementById("namaSiswa").innerText=siswa.nama;
+  document.getElementById("nisnSiswa").innerText=siswa.NISN;
+
+  let rows="";
+  for(const [mapel,nilai] of Object.entries(siswa.nilai)){
+    let ket = nilai>=76 ? "Tuntas":"Belum Tuntas";
+    rows+=`<tr><td>${mapel.replace(/_/g," ")}</td><td>${nilai}</td><td>${ket}</td></tr>`;
+  }
+  document.getElementById("nilai").innerHTML=rows;
+}
+
+function cetakNilai(){
+  const area = document.getElementById("captureArea");
+  html2canvas(area, {
+    scrollY: 0,
+    useCORS: true,
+    scale: 2,
+    windowWidth: document.body.scrollWidth,
+    windowHeight: document.body.scrollHeight
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "Transkrip_Nilai.jpg";
+    link.href = canvas.toDataURL("image/jpeg", 1.0);
+    link.click();
+  });
+}
+</script>
+</body>
+</html>
