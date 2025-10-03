@@ -3,224 +3,137 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Transkrip Nilai ASALM Semester 1 Kelas 5 SDN Pengkol</title>
+  <title>Transkrip Nilai Kelas 5</title>
   <style>
-    :root { --green:#00796b; }
-    body {
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:#f5f7fa;
-    }
-    .wrap {
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:30px 12px;
-      box-sizing:border-box;
-    }
-    .container {
-      background:#fff;
-      width:100%;
-      max-width:560px;
-      border-radius:12px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.08);
-      padding:28px;
-      box-sizing:border-box;
-      position:relative;
-      text-align:center;
-    }
-    .logo {
-      position:absolute;
-      top:12px;
-      left:12px;
-      width:70px;
-      height:auto;
-    }
-    h2 { color:var(--green); margin:0 0 6px 0; }
-    p.subtitle { color:var(--green); font-weight:700; margin:0 0 18px 0; }
-    input {
-      width:100%;
-      padding:10px 12px;
-      margin:10px 0;
-      border:1px solid #d0d0d0;
-      border-radius:8px;
-      font-size:14px;
-      box-sizing:border-box;
-    }
-    button {
-      padding:6px 10px;
-      border-radius:6px;
-      border:none;
-      background:var(--green);
-      color:#fff;
-      font-size:14px;
-      cursor:pointer;
-    }
+    body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
+    .wrap { min-height:100vh; display:flex; justify-content:center; align-items:center; padding:30px 12px; box-sizing:border-box; }
+    .container { width:100%; max-width:720px; border-radius:12px; padding:22px; box-sizing:border-box; }
+    h2 { color:#00796b; margin:0 0 6px 0; }
+    p.subtitle { color:#00796b; font-weight:700; margin:0 0 18px 0; }
+    input { width:100%; padding:10px 12px; margin:6px 0; border:1px solid #d0d0d0; border-radius:8px; font-size:14px; box-sizing:border-box; }
+    button { padding:10px 16px; border-radius:8px; border:none; background:#00796b; color:#fff; font-size:14px; cursor:pointer; }
     button:hover { background:#005b49; }
     .hidden { display:none; }
-    .judul-nilai {
-      text-align:center;
-      background:var(--green);
-      color:#fff;
-      padding:8px;
-      border-radius:6px;
-      margin:18px 0 10px 0;
-      font-size:15px;
-    }
-    table {
-      width:100%;
-      border-collapse:collapse;
-      margin-top:8px;
-    }
-    th,td {
-      border:1px solid #ddd;
-      padding:8px;
-      text-align:center;
-      font-size:14px;
-    }
-    th { background:var(--green); color:#fff; font-weight:700; }
-    .result { text-align:left; }
-    .wali {
-      text-align:left;
-      font-weight:700;
-      font-size:13px;
-      color:#333;
-      margin-top:16px;
-      margin-bottom:10px;
-    }
-    .tombol-cetak {
-      text-align:right;
-      margin-top:8px;
-    }
-    .tombol-cetak button {
-      padding:6px 10px;
-      border-radius:6px;
-      border:none;
-      background:var(--green);
-      color:#fff;
-      font-size:14px;
-      cursor:pointer;
-    }
-    .tombol-cetak button:hover { background:#005b49; }
+    .judul-nilai { text-align:center; background:#00796b; color:#fff; padding:8px; border-radius:6px; margin:12px 0 10px 0; font-size:15px; }
+    table { width:100%; border-collapse:collapse; margin-top:8px; }
+    th,td { border:1px solid #ddd; padding:8px; text-align:center; font-size:14px; }
+    th { background:#00796b; color:#fff; font-weight:700; }
+    .wali { text-align:left; font-weight:700; font-size:13px; color:#333; margin-top:16px; }
+    .tombol-area { display:flex; gap:8px; justify-content:flex-end; margin-top:12px; }
+    /* Area cetak A4 */
     #captureArea {
-      display: block;
-      width: 100%;
+      background: #fff;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 20mm;
       box-sizing: border-box;
-      padding-bottom: 10px;
+      margin:auto;
     }
   </style>
 </head>
 <body>
-
 <div class="wrap">
-  <!-- Halaman Login -->
+  <!-- Login -->
   <div id="loginForm" class="container">
-    <img src="Desain tanpa judul.png" class="logo" alt="Logo SD">
-    <h2>Transkrip Nilai ASALM</h2>
-    <p class="subtitle">Semester 2 Kelas 5 SDN Pengkol</p>
-    <input type="text" id="nama" placeholder="Username">
-    <input type="text" id="nisn" placeholder="Password">
-    <button style="width:100%;margin-top:8px;" onclick="lihatTranskrip()">Lihat Transkrip</button>
-    <p id="error" style="color:#c0392b; margin-top:8px;"></p>
+    <h2>Transkrip Nilai</h2>
+    <p class="subtitle">KELAS 5 SDN PENGKOL</p>
+    <input type="text" id="nama" placeholder="Masukkan Nama">
+    <input type="text" id="nisn" placeholder="Masukkan NISN">
+    <button onclick="lihatTranskrip()">Lihat Nilai</button>
+    <p id="error" style="color:#c0392b;"></p>
   </div>
 
-  <!-- Halaman Hasil -->
+  <!-- Hasil -->
   <div id="hasil" class="container hidden">
     <div id="captureArea">
-      <h2>Data Siswa</h2>
-      <div class="result">
-        <p><b>Nama:</b> <span id="namaSiswa"></span></p>
-        <p><b>NISN:</b> <span id="nisnSiswa"></span></p>
-        <h3 class="judul-nilai">Nilai Asesmen Sumatif Akhir Lingkup Materi</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Mata Pelajaran</th>
-              <th>Nilai</th>
-              <th>Keterangan</th>
-            </tr>
-          </thead>
-          <tbody id="nilai"></tbody>
-        </table>
-
-        <!-- Wali Kelas di bawah tabel -->
-        <div class="wali hidden" id="waliBox">
-          Wali Kelas V<br>
-          ADITYA WAHYU WARDANA, S.Pd<br>
-          NIP 199403192023211005
-        </div>
+      <p><b>Nama:</b> <span id="namaSiswa"></span></p>
+      <p><b>NISN:</b> <span id="nisnSiswa"></span></p>
+      <h3 class="judul-nilai">Nilai Asesmen Sumatif Akhir Lingkup Materi</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Mata Pelajaran</th><th>Nilai</th><th>Keterangan</th>
+          </tr>
+        </thead>
+        <tbody id="nilai"></tbody>
+      </table>
+      <div class="wali">
+        Wali Kelas V<br>
+        ADITYA WAHYU WARDANA, S.Pd<br>
+        NIP 199403192023211005
       </div>
     </div>
-
-    <!-- Tombol cetak di luar area cetak -->
-    <div class="tombol-cetak hidden" id="tombolCetak">
+    <div class="tombol-area">
+      <button style="background:#6c757d" onclick="logout()">Logout</button>
       <button onclick="cetakNilai()">Cetak Nilai</button>
     </div>
   </div>
 </div>
 
-<!-- Library untuk menangkap halaman jadi gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <script>
-// Data siswa
-const dataSiswa = [
-  {NISN:"1698", nama:"Alvaro Adnan Aji Pambudi", nilai:{Pendidikan_Pancasila:90, Bahasa_Indonesia:88, Matematika:85, Seni_Budaya:87, IPAS:89, Bahasa_Jawa:86}},
-  {NISN:"1699", nama:"Anantha Yudha Diztira", nilai:{Pendidikan_Pancasila:88, Bahasa_Indonesia:85, Matematika:82, Seni_Budaya:86, IPAS:87, Bahasa_Jawa:85}},
-  {NISN:"1700", nama:"Arifah Yhuan Nur Azizah", nilai:{Pendidikan_Pancasila:85, Bahasa_Indonesia:87, Matematika:83, Seni_Budaya:85, IPAS:84, Bahasa_Jawa:84}},
-  {NISN:"1701", nama:"Aurelia Gieni Lindria Putri", nilai:{Pendidikan_Pancasila:89, Bahasa_Indonesia:86, Matematika:84, Seni_Budaya:87, IPAS:88, Bahasa_Jawa:86}},
-  {NISN:"1702", nama:"Dhafitha Nizza Nur Azizah", nilai:{Pendidikan_Pancasila:86, Bahasa_Indonesia:84, Matematika:82, Seni_Budaya:85, IPAS:83, Bahasa_Jawa:85}},
-  {NISN:"1703", nama:"Dhian Rahmawati", nilai:{Pendidikan_Pancasila:87, Bahasa_Indonesia:85, Matematika:84, Seni_Budaya:86, IPAS:85, Bahasa_Jawa:85}},
-  {NISN:"1704", nama:"Dimas Rasyid Faristia", nilai:{Pendidikan_Pancasila:88, Bahasa_Indonesia:86, Matematika:83, Seni_Budaya:85, IPAS:86, Bahasa_Jawa:84}},
-  {NISN:"1705", nama:"Erfin Denu Setiawan", nilai:{Pendidikan_Pancasila:86, Bahasa_Indonesia:83, Matematika:82, Seni_Budaya:84, IPAS:85, Bahasa_Jawa:83}},
-  {NISN:"1706", nama:"Marsya Anindya Kiera", nilai:{Pendidikan_Pancasila:90, Bahasa_Indonesia:88, Matematika:86, Seni_Budaya:87, IPAS:89, Bahasa_Jawa:85}},
-  {NISN:"1708", nama:"Mikayla Ayuningtyas", nilai:{Pendidikan_Pancasila:89, Bahasa_Indonesia:87, Matematika:85, Seni_Budaya:86, IPAS:88, Bahasa_Jawa:84}},
-  {NISN:"1709", nama:"Muhammad Ozil Ramadhan", nilai:{Pendidikan_Pancasila:88, Bahasa_Indonesia:86, Matematika:84, Seni_Budaya:85, IPAS:87, Bahasa_Jawa:83}},
-  {NISN:"1710", nama:"Rhevan Nabil Yudanta", nilai:{Pendidikan_Pancasila:87, Bahasa_Indonesia:85, Matematika:83, Seni_Budaya:84, IPAS:86, Bahasa_Jawa:82}},
-  {NISN:"1711", nama:"Ridho Wicaksono", nilai:{Pendidikan_Pancasila:86, Bahasa_Indonesia:84, Matematika:82, Seni_Budaya:83, IPAS:85, Bahasa_Jawa:81}},
-  {NISN:"1712", nama:"Rizky Syam Dani", nilai:{Pendidikan_Pancasila:85, Bahasa_Indonesia:83, Matematika:81, Seni_Budaya:82, IPAS:84, Bahasa_Jawa:80}},
-  {NISN:"1713", nama:"Tanca Al Verosa", nilai:{Pendidikan_Pancasila:84, Bahasa_Indonesia:82, Matematika:80, Seni_Budaya:81, IPAS:83, Bahasa_Jawa:79}}
+let dataSiswa = [
+  {NISN:"0145489184", nama:"Alvaro Adnan Aji Pambudi", nilai:{Pancasila:82, Indonesia:77, Matematika:80, SeniBudaya:68, IPAS:76, Jawa:82}},
+  {NISN:"0141315098", nama:"Anantha Yudha Diztira", nilai:{Pancasila:76, Indonesia:82, Matematika:90, SeniBudaya:77, IPAS:77, Jawa:84}},
+  {NISN:"0149017169", nama:"Arifah Yhuan Nur Azizah", nilai:{Pancasila:70, Indonesia:71, Matematika:75, SeniBudaya:65, IPAS:70, Jawa:84}},
+  {NISN:"0153272128", nama:"Aurelia Gieni Lindria Putri", nilai:{Pancasila:84, Indonesia:68, Matematika:62, SeniBudaya:74, IPAS:71, Jawa:73}},
+  {NISN:"0141702186", nama:"Dhafitha Nizza Nur Azizah", nilai:{Pancasila:72, Indonesia:71, Matematika:77, SeniBudaya:67, IPAS:77, Jawa:83}},
+  {NISN:"0148829849", nama:"Dhian Rahmawati", nilai:{Pancasila:68, Indonesia:56, Matematika:42, SeniBudaya:74, IPAS:58, Jawa:64}},
+  {NISN:"0144715419", nama:"Dimas Rasyid Faristia", nilai:{Pancasila:90, Indonesia:90, Matematika:92, SeniBudaya:85, IPAS:79, Jawa:85}},
+  {NISN:"0148794981", nama:"Erfin Denu Setiawan", nilai:{Pancasila:56, Indonesia:44, Matematika:45, SeniBudaya:61, IPAS:56, Jawa:65}},
+  {NISN:"0141168836", nama:"Marsya Anindya Kiera", nilai:{Pancasila:84, Indonesia:82, Matematika:82, SeniBudaya:77, IPAS:84, Jawa:88}},
+  {NISN:"0154789336", nama:"Mikayla Ayuningtyas", nilai:{Pancasila:80, Indonesia:67, Matematika:80, SeniBudaya:66, IPAS:73, Jawa:84}},
+  {NISN:"0142446401", nama:"Muhammad Ozil Ramadhan", nilai:{Pancasila:80, Indonesia:76, Matematika:87, SeniBudaya:68, IPAS:72, Jawa:76}},
+  {NISN:"0133302359", nama:"Rhevan Nabil Yudanta", nilai:{Pancasila:96, Indonesia:93, Matematika:97, SeniBudaya:93, IPAS:94, Jawa:98}},
+  {NISN:"0142309990", nama:"Ridho Wicaksono", nilai:{Pancasila:92, Indonesia:93, Matematika:93, SeniBudaya:93, IPAS:92, Jawa:98}},
+  {NISN:"0144958788", nama:"Rizky Syam Dani", nilai:{Pancasila:88, Indonesia:88, Matematika:87, SeniBudaya:83, IPAS:92, Jawa:94}},
+  {NISN:"0147263123", nama:"Tanca Al Verosa", nilai:{Pancasila:92, Indonesia:95, Matematika:98, SeniBudaya:91, IPAS:98, Jawa:98}}
 ];
 
 function lihatTranskrip(){
-  const namaInput=document.getElementById("nama").value.trim().toLowerCase();
-  const nisnInput=document.getElementById("nisn").value.trim();
-  const siswa=dataSiswa.find(s=>s.NISN===nisnInput && s.nama.toLowerCase()===namaInput);
-
-  if(!siswa){
-    document.getElementById("error").innerText="Data siswa tidak ditemukan!";
+  const namaInput = document.getElementById("nama").value.trim().toLowerCase().replace(/\s+/g," ");
+  const nisnInput = document.getElementById("nisn").value.trim();
+  const idx = dataSiswa.findIndex(s => 
+    s.NISN===nisnInput && s.nama.toLowerCase().replace(/\s+/g," ")===namaInput
+  );
+  if(idx === -1){
+    document.getElementById("error").innerText="Nama atau NISN salah!";
     return;
   }
-
-  document.getElementById("loginForm").classList.add("hidden");
-  document.getElementById("hasil").classList.remove("hidden");
-  document.getElementById("waliBox").classList.remove("hidden");
-  document.getElementById("tombolCetak").classList.remove("hidden");
-
-  document.getElementById("namaSiswa").innerText=siswa.nama;
-  document.getElementById("nisnSiswa").innerText=siswa.NISN;
+  const siswa = dataSiswa[idx];
+  document.getElementById("namaSiswa").innerText = siswa.nama;
+  document.getElementById("nisnSiswa").innerText = siswa.NISN;
 
   let rows="";
   for(const [mapel,nilai] of Object.entries(siswa.nilai)){
+    let label = (mapel==="Pancasila")?"Pendidikan Pancasila":
+                (mapel==="Indonesia")?"Bahasa Indonesia":
+                (mapel==="Matematika")?"Matematika":
+                (mapel==="SeniBudaya")?"Seni Budaya":
+                (mapel==="IPAS")?"IPAS":"Bahasa Jawa";
     let ket = nilai>=76 ? "Tuntas":"Belum Tuntas";
-    rows+=`<tr><td>${mapel.replace(/_/g," ")}</td><td>${nilai}</td><td>${ket}</td></tr>`;
+    rows += `<tr><td>${label}</td><td>${nilai}</td><td>${ket}</td></tr>`;
   }
-  document.getElementById("nilai").innerHTML=rows;
+  document.getElementById("nilai").innerHTML = rows;
+
+  document.getElementById("loginForm").classList.add("hidden");
+  document.getElementById("hasil").classList.remove("hidden");
+  document.getElementById("error").innerText="";
+}
+
+function logout(){
+  document.getElementById("hasil").classList.add("hidden");
+  document.getElementById("loginForm").classList.remove("hidden");
+  document.getElementById("nama").value="";
+  document.getElementById("nisn").value="";
 }
 
 function cetakNilai(){
   const area = document.getElementById("captureArea");
-  html2canvas(area, {
-    scrollY: 0,
-    useCORS: true,
-    scale: 2,
-    windowWidth: document.body.scrollWidth,
-    windowHeight: document.body.scrollHeight
-  }).then(canvas => {
-    const link = document.createElement("a");
-    link.download = "Transkrip_Nilai.jpg";
-    link.href = canvas.toDataURL("image/jpeg", 1.0);
+  html2canvas(area,{scale:2,useCORS:true}).then(canvas=>{
+    const link=document.createElement("a");
+    link.download="nilai.png";
+    link.href=canvas.toDataURL("image/png");
     link.click();
   });
 }
